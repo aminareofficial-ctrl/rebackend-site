@@ -1070,40 +1070,47 @@ html[data-theme="dark"] footer {
   }
 
 /* ========================================================
-   REBACKEND UNIVERSAL ACCESSIBILITY FORCE ENGINE
+   REBACKEND GLOBAL VISIBILITY & BOUNDS OVERRIDE
    ======================================================= */
 
-/* Force perfect image box fit */
-img[src*="amina"], .profile-photo, .profile-image {
+/* Force perfect image bounding box fit */
+img[src*="amina"], .profile-photo, .profile-image, [class*="portrait"] img, [class*="profile"] img {
   width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
+  height: auto !important;
+  min-height: 400px !important;
+  max-height: 550px !important;
   object-fit: cover !important;
   object-position: center top !important;
-  border-radius: 12px !important;
+  border-radius: 16px !important;
+  display: block !important;
 }
 
-/* Force light mode text and stack colors to explicitly stand out */
-.light h1, .light h2, .light h3, .light p, .light span, .light li, .light a,
-.light-mode h1, .light-mode h2, .light-mode h3, .light-mode p, .light-mode span, .light-mode li, .light-mode a,
-[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] p,
-body:not(.dark) h1, body:not(.dark) h2, body:not(.dark) h3, body:not(.dark) p, body:not(.dark) span, body:not(.dark) li, body:not(.dark) a {
+/* Force light mode text and visibility globally */
+html:not([data-theme="dark"]) h1, html:not([data-theme="dark"]) h2, html:not([data-theme="dark"]) h3, html:not([data-theme="dark"]) p, html:not([data-theme="dark"]) span, html:not([data-theme="dark"]) li, html:not([data-theme="dark"]) a,
+body:not(.dark):not(.dark-mode) h1, body:not(.dark):not(.dark-mode) h2, body:not(.dark):not(.dark-mode) h3, body:not(.dark):not(.dark-mode) p, body:not(.dark):not(.dark-mode) span, body:not(.dark):not(.dark-mode) li, body:not(.dark):not(.dark-mode) a,
+.light h1, .light h2, .light h3, .light p, .light span, .light li, .light-mode h1, .light-mode h2, .light-mode h3, .light-mode p {
   color: #111827 !important; /* Rich charcoal text */
 }
 
-/* Fix emails specifically on light canvases */
-.light a[href^="mailto:"], .light-mode a[href^="mailto:"], body:not(.dark) a[href^="mailto:"] {
+/* Fix emails and contact links explicitly on light canvases */
+html:not([data-theme="dark"]) a[href^="mailto:"], html:not([data-theme="dark"]) .email-text,
+body:not(.dark):not(.dark-mode) a[href^="mailto:"], body:not(.dark):not(.dark-mode) .email-text,
+.light a[href^="mailto:"], .light-mode a[href^="mailto:"] {
   color: #1e1b4b !important; /* Deep accent purple-navy */
   text-decoration: underline !important;
+  opacity: 1 !important;
 }
 
-/* Force icons to remain standard when theme is light */
-.light .tool-stack img, .light-mode .tool-stack img, body:not(.dark) .tool-stack img {
+/* Force icons to remain dark standard when theme is light */
+html:not([data-theme="dark"]) .tool-stack img, html:not([data-theme="dark"]) .tool-card img,
+body:not(.dark):not(.dark-mode) .tool-stack img, body:not(.dark):not(.dark-mode) .tool-card img {
   filter: none !important;
+  opacity: 1 !important;
 }
 
-/* Flip icons to white silhouettes ONLY when dark classes are present */
-.dark img, .dark-mode img, [data-theme="dark"] img, .tool-card img, .tool-stack img {
+/* Flip icons to white silhouettes ONLY when dark parameters are active */
+html[data-theme="dark"] .tool-stack img, html[data-theme="dark"] .tool-card img,
+body.dark img, body.dark-mode img, [data-theme="dark"] img, .tool-card img, .tool-stack img {
   filter: invert(1) brightness(2) contrast(1.2) !important;
   opacity: 0.95 !important;
 }
