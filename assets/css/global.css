@@ -1112,3 +1112,27 @@ body[class*="dark"] img, .tool-card img, .tool-stack img {
   filter: invert(1) brightness(2) contrast(1.2) !important;
   opacity: 0.95 !important;
 }
+
+/* ========================================================
+   FINAL THEMING RESOLUTION (SEPARATES LIGHT & DARK STACKS)
+   ======================================================== */
+
+/* 1. Force Black/Dark Icons ONLY when Light Mode is explicitly active */
+.light img, .light-mode img, [data-theme="light"] img, body:not(.dark):not(.dark-mode) .tool-stack img, body:not(.dark):not(.dark-mode) .tool-card img {
+  filter: none !important;
+  invert: 0 !important;
+  opacity: 1 !important;
+}
+
+/* 2. Force Dark Indigo Text for ALL layout text inside Light Mode */
+.light h1, .light h2, .light h3, .light h4, .light p, .light span, .light li, .light a,
+.light-mode h1, .light-mode h2, .light-mode h3, .light-mode h4, .light-mode p, .light-mode span, .light-mode li, .light-mode a,
+body:not(.dark):not(.dark-mode) h1, body:not(.dark):not(.dark-mode) h2, body:not(.dark):not(.dark-mode) h3, body:not(.dark):not(.dark-mode) p, body:not(.dark):not(.dark-mode) span, body:not(.dark):not(.dark-mode) li, body:not(.dark):not(.dark-mode) a {
+  color: #111827 !important; /* Premium readable charcoal */
+}
+
+body:not(.dark):not(.dark-mode) a[href^="mailto:"], body:not(.dark):not(.dark-mode) .email-text,
+.light a[href^="mailto:"], .light-mode a[href^="mailto:"] {
+  color: #1e1b4b !important; /* Forces your email strings to stay a deep navy */
+  text-decoration: underline !important;
+}
