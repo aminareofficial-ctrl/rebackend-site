@@ -1069,3 +1069,39 @@ html[data-theme="dark"] footer {
     transition: none;
   }
 }
+
+/* ========================================================
+   REBACKEND PRODUCTION PATCHES (FIXES VISIBILITY & CROPPING)
+   ======================================================== */
+
+/* 1. White Mode Contrast Link & Email Overrides */
+.light-theme a, .light-theme a span, .light-mode a, .light-mode a span, 
+[data-theme="light"] a, [data-theme="light"] a span {
+  a[href^="mailto:"], .email-text, p a, footer a, .amina-container a {
+    color: #1e1b4b !important; /* Soft deep premium navy */
+    text-decoration: underline !important;
+    opacity: 1 !important;
+  }
+  h1, h2, h3, h4, p, span, li, a {
+    color: #111827 !important; /* Forces solid visibility across all containers */
+  }
+}
+
+/* 2. Dark Mode Software Icon Restoration */
+.dark-theme .tool-stack-container img, .dark-mode .tool-stack-container img,
+.dark-theme .software-icons img, .dark-mode .software-icons img {
+  .tool-stack-container img, .software-icons img, .tool-stack img, .platforms-grid img {
+    filter: invert(1) brightness(2) !important; /* Flips dark tool logos into sleek white vectors */
+    opacity: 0.9 !important;
+  }
+}
+
+/* 3. Infinite Photo Box Scaling Fix (Amina Portrait) */
+img[src*="amina"], .profile-photo, .profile-image, .founder-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: cover !important; /* Completely fills the layout grid block naturally without crop bars */
+  object-position: center top !important; /* Keeps your facial features framing perfectly centered */
+  border-radius: 12px !important; /* Matches modern tech dashboard aesthetics */
+}
