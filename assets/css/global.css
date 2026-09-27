@@ -1105,3 +1105,10 @@ img[src*="amina"], .profile-photo, .profile-image, .founder-avatar img {
   object-position: center top !important; /* Keeps your facial features framing perfectly centered */
   border-radius: 12px !important; /* Matches modern tech dashboard aesthetics */
 }
+
+/* 4. Complete Dark Mode Logo Visibility Fix */
+.dark img, .dark-mode img, [data-theme="dark"] img, 
+body[class*="dark"] img, .tool-card img, .tool-stack img {
+  filter: invert(1) brightness(2) contrast(1.2) !important;
+  opacity: 0.95 !important;
+}
