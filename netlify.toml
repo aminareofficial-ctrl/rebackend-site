@@ -1,0 +1,28 @@
+[build]
+  publish = "."
+  command = "echo 'No build step required'"
+
+[[redirects]]
+  from = "/services"
+  to = "/services.html"
+  status = 200
+
+[[redirects]]
+  from = "/platforms"
+  to = "/platforms.html"
+  status = 200
+
+[[redirects]]
+  from = "/proof"
+  to = "/proof.html"
+  status = 200
+
+[[redirects]]
+  from = "/pricing"
+  to = "/pricing.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/terms.html"
+  status = 200
