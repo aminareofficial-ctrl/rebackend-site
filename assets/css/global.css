@@ -1070,63 +1070,40 @@ html[data-theme="dark"] footer {
   }
 
 /* ========================================================
-   REBACKEND ALL-IN-ONE FAILSAFE COEXISTENCE PATSU
+   REBACKEND UNIVERSAL ACCESSIBILITY FORCE ENGINE
    ======================================================= */
 
-/* ── 1. PORTRAIT IMAGE BOUNDING BOX STABILIZATION ── */
-img[src*="amina"], .profile-photo, .profile-image, .founder-avatar img, [class*="portrait"] img, [class*="profile"] img {
+/* Force perfect image box fit */
+img[src*="amina"], .profile-photo, .profile-image {
   width: 100% !important;
-  height: auto !important;
-  min-height: 400px !important;
-  max-height: 550px !important;     /* Hard locks the frame from expanding down infinitely */
-  object-fit: cover !important;       /* Crops cleanly within its template responsive grid layout box */
-  object-position: center top !important; /* Forces perfect centering on your facial features */
-  border-radius: 16px !important;    /* Sleek geometric dashboard borders matching interior2 layout */
-  display: block !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  border-radius: 12px !important;
 }
 
-/* ── 2. BULLETPROOF DARK THEME LOGO OVERRIDES (FORCES WHITE SILHOUETTES) ── */
-html[data-theme="dark"] .tool-stack img, html[data-theme="dark"] .tool-card img, html[data-theme="dark"] .software-icons img,
-body.dark-mode .tool-stack img, body.dark-mode .tool-card img, body.dark-mode .software-icons img,
-body.dark .tool-stack img, body.dark .tool-card img, body.dark .software-icons img,
-[class*="dark"] .tool-stack img, [class*="dark"] .tool-card img, [class*="dark"] .software-icons img,
-.dark-theme .tool-stack img, .dark-theme .tool-card img, .dark-theme .software-icons img {
+/* Force light mode text and stack colors to explicitly stand out */
+.light h1, .light h2, .light h3, .light p, .light span, .light li, .light a,
+.light-mode h1, .light-mode h2, .light-mode h3, .light-mode p, .light-mode span, .light-mode li, .light-mode a,
+[data-theme="light"] h1, [data-theme="light"] h2, [data-theme="light"] h3, [data-theme="light"] p,
+body:not(.dark) h1, body:not(.dark) h2, body:not(.dark) h3, body:not(.dark) p, body:not(.dark) span, body:not(.dark) li, body:not(.dark) a {
+  color: #111827 !important; /* Rich charcoal text */
+}
+
+/* Fix emails specifically on light canvases */
+.light a[href^="mailto:"], .light-mode a[href^="mailto:"], body:not(.dark) a[href^="mailto:"] {
+  color: #1e1b4b !important; /* Deep accent purple-navy */
+  text-decoration: underline !important;
+}
+
+/* Force icons to remain standard when theme is light */
+.light .tool-stack img, .light-mode .tool-stack img, body:not(.dark) .tool-stack img {
+  filter: none !important;
+}
+
+/* Flip icons to white silhouettes ONLY when dark classes are present */
+.dark img, .dark-mode img, [data-theme="dark"] img, .tool-card img, .tool-stack img {
   filter: invert(1) brightness(2) contrast(1.2) !important;
   opacity: 0.95 !important;
-}
-
-/* ── 3. STRICT LIGHT THEME ASSET LOGO PRESERVATION (FORCES ORIGINAL DARK LOGOS) ── */
-html[data-theme="light"] .tool-stack img, html[data-theme="light"] .tool-card img, html[data-theme="light"] .software-icons img,
-body.light-mode .tool-stack img, body.light-mode .tool-card img, body.light-mode .software-icons img,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .tool-stack img,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .tool-card img,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .software-icons img {
-  filter: none !important;
-  invert: 0 !important;
-  opacity: 1 !important;
-}
-
-/* ── 4. WHITE MODE TYPOGRAPHY contrast EMPOWERMENT ── */
-html[data-theme="light"] h1, html[data-theme="light"] h2, html[data-theme="light"] h3, html[data-theme="light"] p, html[data-theme="light"] span, html[data-theme="light"] li, html[data-theme="light"] a,
-body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode p, body.light-mode span, body.light-mode li, body.light-mode a,
-body.light h1, body.light h2, body.light h3, body.light p, body.light span, body.light li, body.light a,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) h1,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) h2,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) h3,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) p,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) span,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) li,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) a,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) a span {
-  color: #111827 !important; /* Deep Premium high-contrast carbon charcoal text */
-}
-
-/* ── 5. WHITE MODE LOW-LEVEL EMAIL LINKS VISIBILITY LOCK ── */
-html[data-theme="light"] a[href^="mailto:"], html[data-theme="light"] .email-text,
-body.light-mode a[href^="mailto:"], body.light-mode .email-text,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) a[href^="mailto:"],
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .email-text {
-  color: #1e1b4b !important; /* Deep Navy brand accent contrast anchor */
-  text-decoration: underline !important;
-  opacity: 1 !important;
 }
