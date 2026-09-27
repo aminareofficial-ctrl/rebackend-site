@@ -52,6 +52,9 @@ body {
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
   transition: background 0.2s ease, color 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 img {
@@ -90,10 +93,12 @@ h6 {
   letter-spacing: -0.03em;
   line-height: 0.95;
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 p {
   margin: 0;
+  color: var(--text-primary);
 }
 
 ul,
@@ -113,19 +118,24 @@ ol {
   top: 0;
   left: 0;
   right: 0;
-  z-index: 40;
-  background: rgba(246, 241, 247, 0.95);
+  z-index: 50;
+  background: rgba(246, 241, 247, 0.96);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border-color);
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
 html[data-theme="dark"] .site-header {
-  background: rgba(19, 13, 26, 0.95);
+  background: rgba(19, 13, 26, 0.96);
 }
 
 body {
   padding-top: var(--header-height);
+  padding-bottom: var(--header-height);
+}
+
+main {
+  flex: 1;
 }
 
 .nav-shell {
@@ -148,11 +158,12 @@ body {
   font-weight: 600;
   letter-spacing: -0.02em;
   color: var(--text-primary);
+  text-decoration: none;
 }
 
 .brand-mark {
-  width: 30px;
-  height: 30px;
+  width: 40px;
+  height: 40px;
   border-radius: 8px;
   background: var(--bg-strong);
   color: #fff;
@@ -161,6 +172,7 @@ body {
   font-size: 0.72rem;
   font-weight: 700;
   letter-spacing: -0.06em;
+  flex-shrink: 0;
 }
 
 .brand-logo-img {
@@ -169,6 +181,7 @@ body {
   border-radius: 8px;
   object-fit: cover;
   display: block;
+  flex-shrink: 0;
 }
 
 .nav-links {
@@ -192,6 +205,7 @@ body {
   font-weight: 700;
   color: var(--text-secondary);
   transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  text-decoration: none;
 }
 
 .nav-link:hover {
@@ -218,6 +232,7 @@ body {
   place-items: center;
   transition: transform 0.15s ease, border-color 0.15s ease;
   flex-shrink: 0;
+  padding: 0;
 }
 
 .theme-toggle:hover {
@@ -291,6 +306,7 @@ main {
   letter-spacing: -0.06em;
   margin: 20px 0 18px;
   max-width: 760px;
+  color: var(--text-primary);
 }
 
 .hero h1 .accent {
@@ -322,8 +338,9 @@ main {
   letter-spacing: 0.03em;
   border: 1px solid transparent;
   border-radius: 12px;
-  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
   color: var(--text-primary);
+  text-decoration: none;
 }
 
 .btn:hover {
@@ -533,7 +550,7 @@ main {
 }
 
 .brand-panel p {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.85);
   font-size: 0.95rem;
   line-height: 1.7;
 }
@@ -884,26 +901,38 @@ main {
 }
 
 .page-banner p {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
   max-width: 720px;
   line-height: 1.7;
 }
 
 footer {
-  padding: 32px 0 60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  padding: 12px 0;
+  background: rgba(246, 241, 247, 0.96);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-color);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+html[data-theme="dark"] footer {
+  background: rgba(19, 13, 26, 0.96);
 }
 
 .footer-inner {
   width: min(var(--container), calc(100vw - 48px));
   margin: 0 auto;
   padding: 0 24px;
-  border-top: 1px solid var(--border-color);
-  padding-top: 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 16px;
   flex-wrap: wrap;
+  min-height: auto;
 }
 
 .footer-meta {
@@ -923,11 +952,13 @@ footer {
   letter-spacing: 0.08em;
   text-transform: uppercase;
   font-weight: 700;
+  margin: 0;
 }
 
 .footer-links a {
   transition: color 0.2s ease;
   color: var(--text-secondary);
+  text-decoration: none;
 }
 
 .footer-links a:hover {
@@ -967,6 +998,11 @@ footer {
 }
 
 @media (max-width: 760px) {
+  body {
+    padding-top: var(--header-height);
+    padding-bottom: calc(var(--header-height) + 20px);
+  }
+
   .nav-shell,
   .section-shell {
     width: min(var(--container), calc(100vw - 28px));
@@ -1001,6 +1037,19 @@ footer {
 
   .section {
     padding: 64px 0;
+  }
+
+  footer {
+    padding: 8px 0;
+  }
+
+  .footer-inner {
+    padding: 8px 14px;
+  }
+
+  .footer-links {
+    gap: 10px;
+    font-size: 0.65rem;
   }
 }
 
