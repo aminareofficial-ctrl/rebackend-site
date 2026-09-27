@@ -1068,71 +1068,54 @@ html[data-theme="dark"] footer {
   .tool-card {
     transition: none;
   }
-}
 
 /* ========================================================
-   REBACKEND PRODUCTION PATCHES (FIXES VISIBILITY & CROPPING)
+   REBACKEND ULTIMATE MASTER PRODUCTION OVERHAUL
    ======================================================== */
 
-/* 1. White Mode Contrast Link & Email Overrides */
-.light-theme a, .light-theme a span, .light-mode a, .light-mode a span, 
-[data-theme="light"] a, [data-theme="light"] a span {
-  a[href^="mailto:"], .email-text, p a, footer a, .amina-container a {
-    color: #1e1b4b !important; /* Soft deep premium navy */
-    text-decoration: underline !important;
-    opacity: 1 !important;
-  }
-  h1, h2, h3, h4, p, span, li, a {
-    color: #111827 !important; /* Forces solid visibility across all containers */
-  }
-}
-
-/* 2. Dark Mode Software Icon Restoration */
-.dark-theme .tool-stack-container img, .dark-mode .tool-stack-container img,
-.dark-theme .software-icons img, .dark-mode .software-icons img {
-  .tool-stack-container img, .software-icons img, .tool-stack img, .platforms-grid img {
-    filter: invert(1) brightness(2) !important; /* Flips dark tool logos into sleek white vectors */
-    opacity: 0.9 !important;
-  }
-}
-
-/* 3. Infinite Photo Box Scaling Fix (Amina Portrait) */
-img[src*="amina"], .profile-photo, .profile-image, .founder-avatar img {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  object-fit: cover !important; /* Completely fills the layout grid block naturally without crop bars */
-  object-position: center top !important; /* Keeps your facial features framing perfectly centered */
-  border-radius: 12px !important; /* Matches modern tech dashboard aesthetics */
-}
-
-/* 4. Complete Dark Mode Logo Visibility Fix */
+/* 1. Bulletproof Dark Mode Asset Silhouette Correction */
 .dark img, .dark-mode img, [data-theme="dark"] img, 
-body[class*="dark"] img, .tool-card img, .tool-stack img {
+body[class*="dark"] img, .tool-card img, .tool-stack img, .software-icons img {
   filter: invert(1) brightness(2) contrast(1.2) !important;
   opacity: 0.95 !important;
 }
 
-/* ========================================================
-   FINAL THEMING RESOLUTION (SEPARATES LIGHT & DARK STACKS)
-   ======================================================== */
-
-/* 1. Force Black/Dark Icons ONLY when Light Mode is explicitly active */
-.light img, .light-mode img, [data-theme="light"] img, body:not(.dark):not(.dark-mode) .tool-stack img, body:not(.dark):not(.dark-mode) .tool-card img {
+/* 2. Absolute Separation Rule: Restores Dark Logos on Light Canvas */
+.light img, .light-mode img, [data-theme="light"] img, 
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) img {
   filter: none !important;
   invert: 0 !important;
   opacity: 1 !important;
 }
 
-/* 2. Force Dark Indigo Text for ALL layout text inside Light Mode */
+/* 3. Global Light/White Theme Typography Enforcement */
 .light h1, .light h2, .light h3, .light h4, .light p, .light span, .light li, .light a,
 .light-mode h1, .light-mode h2, .light-mode h3, .light-mode h4, .light-mode p, .light-mode span, .light-mode li, .light-mode a,
-body:not(.dark):not(.dark-mode) h1, body:not(.dark):not(.dark-mode) h2, body:not(.dark):not(.dark-mode) h3, body:not(.dark):not(.dark-mode) p, body:not(.dark):not(.dark-mode) span, body:not(.dark):not(.dark-mode) li, body:not(.dark):not(.dark-mode) a {
-  color: #111827 !important; /* Premium readable charcoal */
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) h1, 
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) h2, 
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) h3, 
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) p, 
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) span, 
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) li, 
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) a {
+  color: #111827 !important; /* Premium High-Readability Carbon Charcoal */
 }
 
-body:not(.dark):not(.dark-mode) a[href^="mailto:"], body:not(.dark):not(.dark-mode) .email-text,
-.light a[href^="mailto:"], .light-mode a[href^="mailto:"] {
-  color: #1e1b4b !important; /* Forces your email strings to stay a deep navy */
+/* 4. White Mode Specialized Email String Lock */
+.light a[href^="mailto:"], .light-mode a[href^="mailto:"], .light .email-text, .light-mode .email-text,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) a[href^="mailto:"],
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]) .email-text {
+  color: #1e1b4b !important; /* Deep Navy Royal Accent Tone */
   text-decoration: underline !important;
+  opacity: 1 !important;
+}
+
+/* 5. Fluid Bounding Box Frame Configuration (Amina Portrait Fix) */
+img[src*="amina"], .profile-photo, .profile-image, .founder-avatar img {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  object-fit: cover !important; 
+  object-position: center top !important; 
+  border-radius: 12px !important; 
 }
