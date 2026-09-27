@@ -1070,52 +1070,63 @@ html[data-theme="dark"] footer {
   }
 
 /* ========================================================
-   REBACKEND ULTIMATE MASTER PRODUCTION OVERHAUL
-   ======================================================== */
+   REBACKEND ALL-IN-ONE FAILSAFE COEXISTENCE PATSU
+   ======================================================= */
 
-/* 1. Bulletproof Dark Mode Asset Silhouette Correction */
-.dark img, .dark-mode img, [data-theme="dark"] img, 
-body[class*="dark"] img, .tool-card img, .tool-stack img, .software-icons img {
+/* ── 1. PORTRAIT IMAGE BOUNDING BOX STABILIZATION ── */
+img[src*="amina"], .profile-photo, .profile-image, .founder-avatar img, [class*="portrait"] img, [class*="profile"] img {
+  width: 100% !important;
+  height: auto !important;
+  min-height: 400px !important;
+  max-height: 550px !important;     /* Hard locks the frame from expanding down infinitely */
+  object-fit: cover !important;       /* Crops cleanly within its template responsive grid layout box */
+  object-position: center top !important; /* Forces perfect centering on your facial features */
+  border-radius: 16px !important;    /* Sleek geometric dashboard borders matching interior2 layout */
+  display: block !important;
+}
+
+/* ── 2. BULLETPROOF DARK THEME LOGO OVERRIDES (FORCES WHITE SILHOUETTES) ── */
+html[data-theme="dark"] .tool-stack img, html[data-theme="dark"] .tool-card img, html[data-theme="dark"] .software-icons img,
+body.dark-mode .tool-stack img, body.dark-mode .tool-card img, body.dark-mode .software-icons img,
+body.dark .tool-stack img, body.dark .tool-card img, body.dark .software-icons img,
+[class*="dark"] .tool-stack img, [class*="dark"] .tool-card img, [class*="dark"] .software-icons img,
+.dark-theme .tool-stack img, .dark-theme .tool-card img, .dark-theme .software-icons img {
   filter: invert(1) brightness(2) contrast(1.2) !important;
   opacity: 0.95 !important;
 }
 
-/* 2. Absolute Separation Rule: Restores Dark Logos on Light Canvas */
-.light img, .light-mode img, [data-theme="light"] img, 
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) img {
+/* ── 3. STRICT LIGHT THEME ASSET LOGO PRESERVATION (FORCES ORIGINAL DARK LOGOS) ── */
+html[data-theme="light"] .tool-stack img, html[data-theme="light"] .tool-card img, html[data-theme="light"] .software-icons img,
+body.light-mode .tool-stack img, body.light-mode .tool-card img, body.light-mode .software-icons img,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .tool-stack img,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .tool-card img,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .software-icons img {
   filter: none !important;
   invert: 0 !important;
   opacity: 1 !important;
 }
 
-/* 3. Global Light/White Theme Typography Enforcement */
-.light h1, .light h2, .light h3, .light h4, .light p, .light span, .light li, .light a,
-.light-mode h1, .light-mode h2, .light-mode h3, .light-mode h4, .light-mode p, .light-mode span, .light-mode li, .light-mode a,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) h1, 
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) h2, 
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) h3, 
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) p, 
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) span, 
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) li, 
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) a {
-  color: #111827 !important; /* Premium High-Readability Carbon Charcoal */
+/* ── 4. WHITE MODE TYPOGRAPHY contrast EMPOWERMENT ── */
+html[data-theme="light"] h1, html[data-theme="light"] h2, html[data-theme="light"] h3, html[data-theme="light"] p, html[data-theme="light"] span, html[data-theme="light"] li, html[data-theme="light"] a,
+body.light-mode h1, body.light-mode h2, body.light-mode h3, body.light-mode p, body.light-mode span, body.light-mode li, body.light-mode a,
+body.light h1, body.light h2, body.light h3, body.light p, body.light span, body.light li, body.light a,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) h1,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) h2,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) h3,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) p,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) span,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) li,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) a,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) a span {
+  color: #111827 !important; /* Deep Premium high-contrast carbon charcoal text */
 }
 
-/* 4. White Mode Specialized Email String Lock */
-.light a[href^="mailto:"], .light-mode a[href^="mailto:"], .light .email-text, .light-mode .email-text,
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) a[href^="mailto:"],
-body:not(.dark):not(.dark-mode):not([data-theme="dark"]) .email-text {
-  color: #1e1b4b !important; /* Deep Navy Royal Accent Tone */
+/* ── 5. WHITE MODE LOW-LEVEL EMAIL LINKS VISIBILITY LOCK ── */
+html[data-theme="light"] a[href^="mailto:"], html[data-theme="light"] .email-text,
+body.light-mode a[href^="mailto:"], body.light-mode .email-text,
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) a[href^="mailto:"],
+body:not(.dark):not(.dark-mode):not([data-theme="dark"]):not(.dark-theme) .email-text {
+  color: #1e1b4b !important; /* Deep Navy brand accent contrast anchor */
   text-decoration: underline !important;
   opacity: 1 !important;
-}
-
-/* 5. Fluid Bounding Box Frame Configuration (Amina Portrait Fix) */
-img[src*="amina"], .profile-photo, .profile-image, .founder-avatar img {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  object-fit: cover !important; 
-  object-position: center top !important; 
-  border-radius: 12px !important; 
 }
