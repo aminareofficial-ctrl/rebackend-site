@@ -1068,3 +1068,50 @@ html[data-theme="dark"] footer {
   .tool-card {
     transition: none;
   }
+
+/* ========================================================
+   REBACKEND UNIVERSAL ACCESSIBILITY & BOUNDS OVERRIDE ENGINE
+   ======================================================= */
+
+/* ── 1. PORTRAIT IMAGE BOUNDING BOX STABILIZATION ── */
+img[src*="amina"], .profile-photo, .profile-image, [class*="portrait"] img, [class*="profile"] img, .about-image img, .founder-image img {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 420px !important;
+  max-height: 580px !important;
+  object-fit: cover !important;        /* Prevents portrait from getting squished or distorted */
+  object-position: center top !important;  /* Centers facial features perfectly inside the crop box */
+  border-radius: 16px !important;     /* Smooth geometric dashboard borders matching interior2 layout */
+  display: block !important;
+  margin: 0 auto !important;           /* Centers image inside its desktop column layout */
+}
+
+/* ── 2. WHITE MODE RESOLUTION: HIGH-CONTRAST TYPOGRAPHY ── */
+html:not([data-theme="dark"]) h1, html:not([data-theme="dark"]) h2, html:not([data-theme="dark"]) h3, html:not([data-theme="dark"]) p, html:not([data-theme="dark"]) span, html:not([data-theme="dark"]) li, html:not([data-theme="dark"]) a,
+body:not(.dark):not(.dark-mode) h1, body:not(.dark):not(.dark-mode) h2, body:not(.dark):not(.dark-mode) h3, body:not(.dark):not(.dark-mode) p, body:not(.dark):not(.dark-mode) span, body:not(.dark):not(.dark-mode) li, body:not(.dark):not(.dark-mode) a,
+.light h1, .light h2, .light h3, .light p, .light span, .light li, .light-mode h1, .light-mode h2, .light-mode h3, .light-mode p {
+  color: #111827 !important; /* Forces solid black/charcoal visibility across all text on white screens */
+}
+
+/* ── 3. WHITE MODE SPECIALIZED EMAIL STRING LOCK ── */
+html:not([data-theme="dark"]) a[href^="mailto:"], html:not([data-theme="dark"]) .email-text,
+body:not(.dark):not(.dark-mode) a[href^="mailto:"], body:not(.dark):not(.dark-mode) .email-text,
+.light a[href^="mailto:"], .light-mode a[href^="mailto:"] {
+  color: #1e1b4b !important; /* Premium Dark Navy Brand Contrast Highlight */
+  text-decoration: underline !important;
+  opacity: 1 !important;
+}
+
+/* ── 4. STRICT LIGHT THEME ASSET LOGO PRESERVATION ── */
+html:not([data-theme="dark"]) .tool-stack img, html:not([data-theme="dark"]) .tool-card img, html:not([data-theme="dark"]) .software-icons img,
+body:not(.dark):not(.dark-mode) .tool-stack img, body:not(.dark):not(.dark-mode) .tool-card img, body:not(.dark):not(.dark-mode) .software-icons img {
+  filter: none !important; /* Keeps software icons dark and legible on light canvases */
+  opacity: 1 !important;
+}
+
+/* ── 5. BULLETPROOF DARK THEME LOGO OVERRIDES (FORCES WHITE SILHOUETTES) ── */
+html[data-theme="dark"] .tool-stack img, html[data-theme="dark"] .tool-card img, html[data-theme="dark"] .software-icons img,
+body.dark img, body.dark-mode img, [data-theme="dark"] img, .tool-card img, .tool-stack img, .software-icons img {
+  filter: invert(1) brightness(2) contrast(1.2) !important; /* Flips dark logos into clean white silhouettes against dark backgrounds */
+  opacity: 0.95 !important;
+}
