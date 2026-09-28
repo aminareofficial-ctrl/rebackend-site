@@ -1068,104 +1068,625 @@ html[data-theme="dark"] footer {
   .tool-card {
     transition: none;
   }
-/* Theme visibility, navigation controls, tool logos, and founder portrait */
-
-/* Default to a readable light theme unless a dark theme is explicitly active. */
-:root:not(.dark):not(.dark-mode):not(.dark-theme):not([data-theme="dark"]),
-html:not(.dark):not(.dark-mode):not(.dark-theme):not([data-theme="dark"]) body {
-  color: #111827;
 }
 
-:root:not(.dark):not(.dark-mode):not(.dark-theme):not([data-theme="dark"])
-  :is(h1, h2, h3, h4, p, span) {
-  color: #111827;
+/* Theme text is driven by the same tokens used by every page. */
+:root {
+  color-scheme: light;
 }
 
-:root:not(.dark):not(.dark-mode):not(.dark-theme):not([data-theme="dark"])
-  :is(.amina-container .email-text, .hero-section .cta-button) {
-  color: #1e1b4b;
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+html[data-theme="dark"] {
+  color-scheme: dark;
 }
 
-/* Explicit dark-theme typography and links. */
-:root:is(.dark, .dark-mode, .dark-theme, [data-theme="dark"]) body,
-html:is(.dark, .dark-mode, .dark-theme, [data-theme="dark"]) body {
-  color: #f9fafb;
+body {
+  color: var(--text-primary);
 }
 
-:root:is(.dark, .dark-mode, .dark-theme, [data-theme="dark"])
-  :is(h1, h2, h3, h4, p, span) {
-  color: #f9fafb;
+body :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--text-primary);
 }
 
-:root:is(.dark, .dark-mode, .dark-theme, [data-theme="dark"])
-  :is(.amina-container .email-text, .hero-section .cta-button) {
-  color: #c4b5fd;
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+body p {
+  color: var(--text-primary);
 }
 
-/* Also honor a dark-mode class applied directly to body. */
-body:is(.dark, .dark-mode, .dark-theme) {
-  color: #f9fafb;
-}
-
-body:is(.dark, .dark-mode, .dark-theme)
-  :is(h1, h2, h3, h4, p, span) {
-  color: #f9fafb;
-}
-
-/* Keep the logo assets native in light mode; invert them only in dark mode. */
-.software-icons img {
-  filter: none;
-}
-
-:root:is(.dark, .dark-mode, .dark-theme, [data-theme="dark"])
-  .software-icons img,
-body:is(.dark, .dark-mode, .dark-theme) .software-icons img {
-  filter: invert(1) brightness(2);
-}
-
-/* Keep both controls together at the far right of the header row. */
-header {
-  display: flex;
-  align-items: center;
+/* Consistent header controls and accessible mobile navigation. */
+.nav-shell {
+  position: relative;
 }
 
 .nav-controls {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-  margin-left: auto;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-left: 8px;
+  flex-shrink: 0;
 }
 
 .menu-toggle {
-  display: inline-flex;
+  display: none;
+  width: 42px;
+  height: 42px;
+  padding: 0;
   align-items: center;
   justify-content: center;
-  flex: 0 0 auto;
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  padding: 0.5rem;
-  font: inherit;
-  cursor: pointer;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
-/* Let the portrait fill its grid cell without distorting the image. */
-.portrait-box {
-  min-width: 0;
+.menu-toggle:hover {
+  transform: translateY(-1px);
+  border-color: var(--accent-primary);
+}
+
+.menu-toggle:focus-visible,
+.theme-toggle:focus-visible,
+.nav-link:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid var(--accent-primary);
+  outline-offset: 3px;
+}
+
+/* The real source portrait is kept proportional and framed without distortion. */
+.founder-photo-panel {
+  height: clamp(400px, 43vw, 530px);
+  max-height: 550px;
   min-height: 0;
+  aspect-ratio: 0.9;
+  padding: 0;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 18px;
+  transform-style: preserve-3d;
+  transition: transform 0.2s ease;
+  will-change: transform;
 }
 
-img[src*="amina"] {
+.founder-photo-panel::before {
+  content: none;
+}
+
+.hero-photo,
+img[src*="amina-photo"] {
+  position: absolute;
+  inset: 0;
   display: block;
   width: 100%;
   height: 100%;
   max-height: 550px;
   object-fit: cover;
   object-position: center top;
+  border-radius: inherit;
+}
+
+.photo-caption {
+  position: absolute;
+  z-index: 3;
+  left: 18px;
+  bottom: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  max-width: calc(100% - 36px);
+  padding: 12px 15px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-soft);
+}
+
+.photo-caption strong {
+  color: var(--text-primary);
+  font-family: "Fraunces", Georgia, serif;
+  font-size: 1.05rem;
+}
+
+.photo-caption span {
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+}
+
+.photo-tag {
+  position: absolute;
+  z-index: 3;
+  top: 16px;
+  right: 16px;
+  padding: 9px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* A real service example replaces abstract or invented dashboard metrics. */
+.workflow-section {
+  background: var(--bg-secondary);
+}
+
+.workflow-heading {
+  max-width: 780px;
+}
+
+.workflow-track {
+  --workflow-gap: 24px;
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--workflow-gap);
+  margin-top: 38px;
+  list-style: none;
+}
+
+.workflow-track::before {
+  content: "";
+  position: absolute;
+  z-index: 0;
+  top: 23px;
+  left: 16.66%;
+  right: 16.66%;
+  height: 2px;
+  background: var(--border-color);
+}
+
+.workflow-track::after {
+  content: "";
+  position: absolute;
+  z-index: 2;
+  top: 19px;
+  left: 16.66%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--accent-primary);
+  box-shadow: 0 0 16px var(--accent-soft);
+  animation: workflow-travel 5s ease-in-out infinite;
+}
+
+@keyframes workflow-travel {
+  0%, 8% { left: 16.66%; }
+  90%, 100% { left: calc(83.33% - 10px); }
+}
+
+.workflow-step {
+  position: relative;
+  z-index: 1;
+  padding: 0 14px 16px;
+  text-align: center;
   border-radius: 16px;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.workflow-step:hover {
+  transform: translateY(-4px);
+  background: var(--card-bg);
+}
+
+.workflow-icon {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  margin: 0 auto 17px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  background: var(--card-bg);
+  color: var(--accent-primary);
+  font-size: 0.75rem;
+  font-weight: 800;
+  box-shadow: var(--shadow-soft);
+}
+
+.workflow-step h3 {
+  margin-bottom: 10px;
+  font-size: clamp(1.25rem, 1.8vw, 1.65rem);
+  line-height: 1.08;
+}
+
+.workflow-step p {
+  max-width: 310px;
+  margin: 0 auto;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+
+.workflow-caption {
+  margin-top: 20px;
+  color: var(--text-secondary);
+  font-size: 0.82rem;
+  text-align: center;
+}
+
+.home-feature-list {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  color: var(--accent-primary);
+  font-weight: 700;
+}
+
+.text-link:hover {
+  color: var(--accent-strong);
+}
+
+.platform-strip {
+  display: grid;
+  grid-template-columns: minmax(230px, 0.9fr) minmax(0, 1.1fr);
+  gap: 28px;
+  align-items: center;
+}
+
+.platform-strip h2 {
+  margin-top: 14px;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.platform-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 9px;
+}
+
+.platform-chips span {
+  padding: 9px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 999px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.contact-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: clamp(22px, 4vw, 42px);
+}
+
+.contact-panel .eyebrow {
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.contact-panel h2 {
+  margin-top: 14px;
+  color: #fff;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+}
+
+.contact-panel p {
+  margin-top: 14px;
+  max-width: 600px;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.contact-button {
+  flex-shrink: 0;
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.contact-button:hover {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+html[data-theme="dark"] .tool-icon:not(.text-badge) img {
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 980px) {
+  .platform-strip {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 760px) {
+  .nav-controls {
+    gap: 7px;
+    margin-left: auto;
+  }
+
+  .menu-toggle {
+    display: inline-flex;
+  }
+
+  .nav-links.is-open {
+    position: absolute;
+    top: calc(100% - 2px);
+    right: 14px;
+    z-index: 60;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 4px;
+    width: min(280px, calc(100vw - 28px));
+    margin: 0;
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    background: var(--card-bg);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .nav-links.is-open .nav-link {
+    justify-content: flex-start;
+    width: 100%;
+    padding: 12px;
+    color: var(--text-primary);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+  }
+
+  .nav-links.is-open .nav-link.is-active {
+    color: #fff;
+  }
+
+  .founder-photo-panel {
+    height: clamp(390px, 96vw, 520px);
+    max-height: 550px;
+    aspect-ratio: 0.95;
+  }
+
+  .workflow-track {
+    grid-template-columns: 1fr;
+    gap: 18px;
+    margin-left: 8px;
+    padding-left: 54px;
+  }
+
+  .workflow-track::before {
+    top: 20px;
+    bottom: 36px;
+    left: 20px;
+    right: auto;
+    width: 2px;
+    height: auto;
+  }
+
+  .workflow-track::after {
+    top: 20px;
+    left: 16px;
+    animation-name: workflow-travel-vertical;
+  }
+
+  @keyframes workflow-travel-vertical {
+    0%, 8% { top: 20px; }
+    90%, 100% { top: calc(100% - 40px); }
+  }
+
+  .workflow-step {
+    padding: 0 8px 10px 0;
+    text-align: left;
+  }
+
+  .workflow-icon {
+    position: absolute;
+    top: 0;
+    left: -54px;
+    margin: 0;
+  }
+
+  .workflow-step p {
+    margin: 0;
+  }
+
+  .workflow-caption {
+    text-align: left;
+  }
+
+  .contact-panel {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .marquee-track,
+  .workflow-track::after {
+    animation: none;
+  }
+
+  .btn,
+  .theme-toggle,
+  .menu-toggle,
+  .nav-link,
+  .tool-card,
+  .workflow-step,
+  .founder-photo-panel {
+    transition: none;
+  }
+}
+
+
+/* Contact page availability cue and narrow-screen workflow heading fit. */
+.contact-status::before,
+.online-indicator::before {
+  background: #8bd7a7;
+  box-shadow: 0 0 0 4px rgba(139, 215, 167, 0.14), 0 0 12px rgba(139, 215, 167, 0.62);
+  animation: contact-status-pulse 2.2s ease-out infinite;
+}
+
+@keyframes contact-status-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(139, 215, 167, 0.42), 0 0 10px rgba(139, 215, 167, 0.55); }
+  70% { box-shadow: 0 0 0 7px rgba(139, 215, 167, 0), 0 0 10px rgba(139, 215, 167, 0.3); }
+  100% { box-shadow: 0 0 0 0 rgba(139, 215, 167, 0), 0 0 10px rgba(139, 215, 167, 0.55); }
+}
+
+@media (max-width: 760px) {
+  .grid-matrix,
+  .grid-matrix .matrix-card,
+  .grid-matrix .matrix-card h3 {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .grid-matrix .matrix-card h3 {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    font-size: clamp(1.1rem, 5.2vw, 1.3rem);
+    line-height: 1.1;
+  }
+
+  .workflow-track,
+  .workflow-step,
+  .workflow-step h3 {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .workflow-step h3 {
+    overflow-wrap: anywhere;
+    word-break: normal;
+    font-size: clamp(1.1rem, 5.2vw, 1.35rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-status::before,
+  .online-indicator::before {
+    animation: none;
+  }
+}
+
+/* Give the home hero the same soft white and lilac glow as the contact page. */
+.home-hero {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(255, 255, 255, 0.96) 0%, rgba(255, 255, 255, 0) 46%),
+    radial-gradient(ellipse at 88% 64%, rgba(216, 180, 225, 0.25) 0%, rgba(216, 180, 225, 0) 45%),
+    linear-gradient(135deg, #fff 0%, var(--bg-primary) 54%, var(--bg-secondary) 100%);
+  transition: background 0.25s ease;
+}
+
+html[data-theme="dark"] .home-hero {
+  background:
+    radial-gradient(ellipse at 12% 8%, rgba(207, 158, 226, 0.13) 0%, rgba(207, 158, 226, 0) 46%),
+    radial-gradient(ellipse at 88% 64%, rgba(123, 77, 130, 0.2) 0%, rgba(123, 77, 130, 0) 45%),
+    var(--bg-primary);
+}
+
+/* Keep service cards readable in narrow browser and phone layouts. */
+@media (max-width: 900px) {
+  /* This later rule overrides the earlier tablet/mobile .feature-list rule. */
+  .home-feature-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-feature-list .feature-card,
+  .home-feature-list .feature-card h3,
+  .home-feature-list .feature-card p {
+    min-width: 0;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+
+  .grid-matrix {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .grid-matrix .matrix-card,
+  .grid-matrix .matrix-card h3,
+  .grid-matrix .matrix-card p {
+    min-width: 0;
+    max-width: 100%;
+  }
+
+  .grid-matrix .matrix-card h3,
+  .grid-matrix .matrix-card p {
+    overflow-wrap: anywhere;
+    word-break: normal;
+  }
+
+  .footer-links {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    width: 100%;
+    gap: 12px 16px;
+  }
+
+  .footer-links a {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
+/* Keep the mobile header pinned and make the footer compact and non-sticky. */
+@media (max-width: 760px) {
+  body {
+    padding-top: var(--header-height);
+    padding-bottom: 0;
+  }
+
+  .site-header {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+  }
+
+  footer {
+    position: static;
+    inset: auto;
+    z-index: auto;
+    margin-top: 24px;
+    padding: 8px 0;
+  }
+
+  .footer-inner {
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 12px;
+    padding: 8px 14px;
+  }
+
+  .footer-inner > .brand {
+    display: none;
+  }
+
+  .footer-links {
+    display: flex;
+    flex: 0 0 auto;
+    width: auto;
+    gap: 0;
+  }
+
+  .footer-links a:not([href="/terms"]) {
+    display: none;
+  }
+
+  .footer-meta {
+    margin: 0;
+    white-space: nowrap;
+    font-size: 0.64rem;
+  }
+
+  footer > p {
+    margin: 0;
+    text-align: center;
+  }
 }
